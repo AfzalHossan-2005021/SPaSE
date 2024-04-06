@@ -5,5 +5,6 @@ Data/King/From_Calcagno_et_al/*
 Workspace/SPaSE/configs/
 Workspace/SPaSE/local_data/
 Workspace/SPaSE/results/
-Workspace/SPaSE/notebooks/
+Workspace/SPaSE/notebooks/*
+!Workspace/SPaSE/notebooks/Figure_generation
 .gitignore
