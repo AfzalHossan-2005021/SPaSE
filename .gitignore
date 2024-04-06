@@ -1,4 +1,7 @@
-Data
+Data/King/Fixed_adatas/*
+!Data/King/Fixed_adatas/google_drive_link.txt
+Data/King/From_Calcagno_et_al/*
+!Data/King/From_Calcagno_et_al/Spatial_object_integrated@meta.data.csv
 Workspace/SPaSE/configs/
 Workspace/SPaSE/local_data/
 Workspace/SPaSE/results/
