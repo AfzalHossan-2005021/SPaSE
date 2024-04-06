@@ -16,7 +16,7 @@ dissimilarity = 'js'
 mode = 1
 
 numIterMaxEmd = 1000000
-numInnerIterMax = 10
+numInnerIterMax = 100
 init_map_scheme = "uniform"
 use_gpu = 1
 QC = 0
@@ -29,20 +29,15 @@ config = {
     "adata_left_path": adata_left_path,
     "adata_right_path": adata_right_path,
     "adata_to_be_synthesized_path": adata_to_be_synthesized_path,
-    "preprocessing": 0,
-    "n_hvgs": 2000,
-    "n_pcs": 15,
     "sinkhorn": sinkhorn,
     "lambda_sinkhorn": lambda_sinkhorn,
     "dissimilarity": dissimilarity,
     "alpha": alpha,
     "init_map_scheme": init_map_scheme,
-    "pre_init_map_scheme": "rot_and_emd",
     "numIterMaxEmd": numIterMaxEmd,
     "numInnerIterMax": numInnerIterMax,
     "use_gpu": use_gpu,
     "QC": QC,
-    "2_seg_method": "mclust",
     "data_folder_path": "../../../Data",
     "sample_left_hvg_h5_save_path": "../../../Data/King/Preprocessed",
     "sample_right_hvg_h5_save_path": "../../../Data/King/Preprocessed",

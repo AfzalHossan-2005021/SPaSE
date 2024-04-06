@@ -10,9 +10,14 @@ from src.AnalyzeOutput import AnalyzeOutput
 
 def main():
     config = load_config()
+
+    print("sample_left", config['sample_left'])
+    print("sample_right", config['sample_right'])
     print('\nalpha:', config['alpha'])
     print('lambda_sinkhorn:', config['lambda_sinkhorn'])
+
     mode = config['mode']
+
     if mode == 1:
         print('mode == 1, doing pairwise align')
         pairwise_align_model = PairwiseAlign(config)
@@ -40,7 +45,7 @@ def main():
         pi = np.load(config['pi_path'])
         config['pi'] = pi
         output_analyzer = AnalyzeOutput(config)
-        output_analyzer.visualize_mapping()
+        # output_analyzer.visualize_mapping()
         output_analyzer.visualize_goodness_of_mapping(
             slice_pos='left')
         output_analyzer.visualize_goodness_of_mapping(

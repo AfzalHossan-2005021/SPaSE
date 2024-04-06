@@ -3,11 +3,8 @@ import json
 from tqdm import tqdm
 
 dataset = 'None'
-adata_left_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
-adata_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
-# adata_left_path = 'None'
-# adata_right_path = 'None'
-
+adata_left_path = 'None'
+adata_right_path = 'None'
 adata_to_be_synthesized_path = 'None'
 
 cases = []
@@ -93,20 +90,15 @@ for case in tqdm(cases):
         "adata_left_path": adata_left_path,
         "adata_right_path": adata_right_path,
         "adata_to_be_synthesized_path": adata_to_be_synthesized_path,
-        "preprocessing": 0,
-        "n_hvgs": 2000,
-        "n_pcs": 15,
         "sinkhorn": sinkhorn,
         "lambda_sinkhorn": lambda_sinkhorn,
         "dissimilarity": dissimilarity,
         "alpha": alpha,
         "init_map_scheme": init_map_scheme,
-        "pre_init_map_scheme": "rot_and_emd",
         "numIterMaxEmd": numIterMaxEmd,
         "numInnerIterMax": numInnerIterMax,
         "use_gpu": use_gpu,
         "QC": QC,
-        "2_seg_method": "mclust",
         "data_folder_path": "../../../Data",
         "sample_left_hvg_h5_save_path": "../../../Data/King/Preprocessed",
         "sample_right_hvg_h5_save_path": "../../../Data/King/Preprocessed",

@@ -25,16 +25,16 @@ class AnalyzeOutput:
         self.sample_left = config['sample_left']
         self.sample_right = config['sample_right']
         self.alpha = config['alpha']
-        self.pre_init_map_scheme = config['pre_init_map_scheme']
-        self.init_map_scheme = config['init_map_scheme']
+        # self.pre_init_map_scheme = config['pre_init_map_scheme']
+        # self.init_map_scheme = config['init_map_scheme']
         self.numIterMaxEmd = config['numIterMaxEmd']
-        self.n_hvgs = config['n_hvgs']
-        self.n_pcs = config['n_pcs']
+        # self.n_hvgs = config['n_hvgs']
+        # self.n_pcs = config['n_pcs']
         self.use_gpu = config['use_gpu']
-        self.sample_left_hvg_h5_save_path = config['sample_left_hvg_h5_save_path']
-        self.sample_right_hvg_h5_save_path = config['sample_right_hvg_h5_save_path']
-        self.data_folder_path = config['data_folder_path']
-        self.preprocessing = config['preprocessing']
+        # self.sample_left_hvg_h5_save_path = config['sample_left_hvg_h5_save_path']
+        # self.sample_right_hvg_h5_save_path = config['sample_right_hvg_h5_save_path']
+        # self.data_folder_path = config['data_folder_path']
+        # self.preprocessing = config['preprocessing']
         self.results_path = config['results_path']
         self.pi = config['pi']
         self.config_file_name = os.path.basename(self.config['config_path'])
@@ -55,20 +55,20 @@ class AnalyzeOutput:
             self.adata_left = dataset_map[self.sample_left]
             self.adata_right = dataset_map[self.sample_right]
 
-        self.distribution = gamma
-        self.gamma_a = 0
-        self.gamma_loc = 0
-        self.gamma_scale = 0
+        # self.distribution = gamma
+        # self.gamma_a = 0
+        # self.gamma_loc = 0
+        # self.gamma_scale = 0
 
-        if self.init_map_scheme == 'spatial':
-            coor_1 = self.adata_left.obsm['spatial']
+        # if self.init_map_scheme == 'spatial':
+        #     coor_1 = self.adata_left.obsm['spatial']
 
-            with open(f'{self.results_path}/{self.dataset}/{self.config_file_name}/init_transform.json') as f:
-                init_transform = json.load(f)
-            if init_transform['mirror']:
-                coor_1 = mirror(coor_1)
-            coor_1 = rotate(coor_1, init_transform['init_rotation'])
-            self.adata_left.obsm['spatial'] = coor_1
+        #     with open(f'{self.results_path}/{self.dataset}/{self.config_file_name}/init_transform.json') as f:
+        #         init_transform = json.load(f)
+        #     if init_transform['mirror']:
+        #         coor_1 = mirror(coor_1)
+        #     coor_1 = rotate(coor_1, init_transform['init_rotation'])
+        #     self.adata_left.obsm['spatial'] = coor_1
         
         config['cost_mat'] = np.load(config['cost_mat_path'])
         self.cost_mat = config['cost_mat']
@@ -84,19 +84,19 @@ class AnalyzeOutput:
         self.ax_hist_rs.set_xlabel('Remodeling score')
         self.ax_hist_rs.set_ylabel('Count')
         
-    def visualize_mapping(self):
-        config_file_name = os.path.basename(self.config['config_path'])
-        adata_left, adata_right, pi = self.adata_left, self.adata_right, self.pi
-        os.makedirs(f'{self.results_path}/{self.dataset}/{config_file_name}/Mappings/', exist_ok=True)
-        non_zero_count = np.count_nonzero(pi)
-        plot_slice_pairwise_alignment_modified(adata_left, adata_right, pi, top=non_zero_count, save=True, save_dir=f'{self.results_path}/{self.dataset}/{config_file_name}/Mappings', name=f'{self.sample_left}_vs_{self.sample_right}_mapping.jpg')
+    # def visualize_mapping(self):
+    #     config_file_name = os.path.basename(self.config['config_path'])
+    #     adata_left, adata_right, pi = self.adata_left, self.adata_right, self.pi
+    #     os.makedirs(f'{self.results_path}/{self.dataset}/{config_file_name}/Mappings/', exist_ok=True)
+    #     non_zero_count = np.count_nonzero(pi)
+    #     plot_slice_pairwise_alignment_modified(adata_left, adata_right, pi, top=non_zero_count, save=True, save_dir=f'{self.results_path}/{self.dataset}/{config_file_name}/Mappings', name=f'{self.sample_left}_vs_{self.sample_right}_mapping.jpg')
 
-    def visualize_coeff_of_variation(self):
-        f, ax = plt.subplots()
-        f.set_size_inches(10, 10)
-        points = ax.scatter(self.adata_right.obsm['spatial'][:, 0], self.adata_right.obsm['spatial'][:, 1], c=variation(self.pi, axis=0))
-        f.colorbar(points)
-        plt.close()
+    # def visualize_coeff_of_variation(self):
+    #     f, ax = plt.subplots()
+    #     f.set_size_inches(10, 10)
+    #     points = ax.scatter(self.adata_right.obsm['spatial'][:, 0], self.adata_right.obsm['spatial'][:, 1], c=variation(self.pi, axis=0))
+    #     f.colorbar(points)
+    #     plt.close()
 
     def visualize_goodness_of_mapping(self, slice_pos='right', invert_x=False):
         if slice_pos == 'left': 
@@ -136,10 +136,10 @@ class AnalyzeOutput:
         f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Goodness_score/{sample_name}_goodness_of_mapping.svg',format='svg',dpi=350,bbox_inches='tight',pad_inches=0)
         plt.close()
 
-    def get_p_value_wrt_gamma(self, val, a, loc, scale):
-        cdf = gamma.cdf(val, a, loc=loc, scale=scale)
-        p_value = 1 - cdf
-        return p_value
+    # def get_p_value_wrt_gamma(self, val, a, loc, scale):
+    #     cdf = gamma.cdf(val, a, loc=loc, scale=scale)
+    #     p_value = 1 - cdf
+    #     return p_value
 
     def divide_into_2_regions_wrt_goodness_score_and_find_DEG(self):
         # left_threshold = get_goodness_threshold_from_null_distribution(self.adata_left)
@@ -149,16 +149,15 @@ class AnalyzeOutput:
         else:
             adata_to_be_synthesized = self.adata_left.copy()
         right_threshold = self.get_goodness_threshold_from_null_distribution(adata_to_be_synthesized)
-        p_values = np.array(list(map(lambda x: self.get_p_value_wrt_gamma(x, self.gamma_a, 
-        self.gamma_loc, self.gamma_scale), self.adata_right.obs['pathological_score'].values)))
-        is_remodeled = np.array([0] * self.adata_right.n_obs)
-        is_remodeled[np.where(p_values < 0.05)[0]] = 1
+        # p_values = np.array(list(map(lambda x: self.get_p_value_wrt_gamma(x, self.gamma_a, self.gamma_loc, self.gamma_scale), self.adata_right.obs['pathological_score'].values)))
+        # is_remodeled = np.array([0] * self.adata_right.n_obs)
+        # is_remodeled[np.where(p_values < 0.05)[0]] = 1
         # np.save('../../../Workspace/SPaSE/local_data/is_remodeled.npy', is_remodeled)
 
-        plt.figure(figsize = (10, 10))
-        plt.axis('off')
-        plt.scatter(self.adata_right.obsm['spatial'][:, 0], self.adata_right.obsm['spatial'][:, 1], c=-is_remodeled, cmap='plasma')
-        plt.savefig(f'{self.results_path}/{self.dataset}/{self.config_file_name}/segmentation_based_of_fitted_gamma_distribution.jpg')
+        # plt.figure(figsize = (10, 10))
+        # plt.axis('off')
+        # plt.scatter(self.adata_right.obsm['spatial'][:, 0], self.adata_right.obsm['spatial'][:, 1], c=-is_remodeled, cmap='plasma')
+        # plt.savefig(f'{self.results_path}/{self.dataset}/{self.config_file_name}/segmentation_based_of_fitted_gamma_distribution.jpg')
 
         print('Thresholds:', right_threshold)
         df_right_threshold = pd.DataFrame({'right_threshold': [right_threshold]})
@@ -196,16 +195,16 @@ class AnalyzeOutput:
         if self.grid_search:
             actual = self.adata_right.obs['is_remodeled_for_grid_search'].values
             predicted = np.array(list(map(lambda x: 1 if x == 'bad' else 0, self.adata_right.obs['region'].values)))
-            predicted_gamma = is_remodeled # prediction from the fitted gamma distribution
+            # predicted_gamma = is_remodeled # prediction from the fitted gamma distribution
 
             F1_score = metrics.f1_score(actual, predicted)
-            F1_score_gamma = metrics.f1_score(actual, predicted_gamma)
+            # F1_score_gamma = metrics.f1_score(actual, predicted_gamma)
 
             df_F1_score = pd.DataFrame({'F1_score': [F1_score]})
             df_F1_score.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/F1_score.csv')
 
-            df_F1_score_gamma = pd.DataFrame({'F1_score': [F1_score_gamma]})
-            df_F1_score_gamma.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/F1_score_gamma.csv')
+            # df_F1_score_gamma = pd.DataFrame({'F1_score': [F1_score_gamma]})
+            # df_F1_score_gamma.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/F1_score_gamma.csv')
 
         os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
         self.adata_left.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_left_processed.h5ad')
@@ -222,7 +221,7 @@ class AnalyzeOutput:
         
         cost_mat_path = f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/cost_mat_{self.sample_left}_0_{self.sample_left}_1_{self.dissimilarity}.npy'
         os.makedirs(os.path.dirname(cost_mat_path), exist_ok=True)
-        pi_low_entropy_path = f'{self.results_path}/{self.dataset}/config_{self.dataset}_{self.sample_left}_vs_{self.sample_right}_js.json/Pis/{self.dataset}_synthetic_left_right_low_entropy.npy'
+        # pi_low_entropy_path = f'{self.results_path}/{self.dataset}/config_{self.dataset}_{self.sample_left}_vs_{self.sample_right}_js.json/Pis/{self.dataset}_synthetic_left_right_low_entropy.npy'
 
         if self.sinkhorn:
             pi_low_entropy = None
@@ -241,7 +240,7 @@ class AnalyzeOutput:
                                              backend=backend,
                                              use_gpu=use_gpu,
                                              numInnerItermax=self.numInnerIterMax)
-            # np.save(f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/pi_adata_0_vs_adata_1_alpha_{self.alpha}_lambda_{self.lambda_sinkhorn}.npy', pi)
+            np.save(f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/pi_adata_0_vs_adata_1_alpha_{self.alpha}_lambda_{self.lambda_sinkhorn}.npy', pi)
             
         else:
             print('sinkhorn not used')
@@ -251,9 +250,9 @@ class AnalyzeOutput:
 
 
         distances_left, weights_left = compute_null_distribution(pi, cost_mat, 'left')
-        print('\n\ndistances_left', distances_left.min(), distances_left.max(), '\n\n')
-        a_left, loc_left, scale_left = self.distribution.fit(distances_left)
-        print(a_left, loc_left, scale_left)
+        # print('\n\ndistances_left', distances_left.min(), distances_left.max(), '\n\n')
+        # a_left, loc_left, scale_left = self.distribution.fit(distances_left)
+        # print(a_left, loc_left, scale_left)
         
 
         plt.figure(figsize=(9, 9))
@@ -265,8 +264,8 @@ class AnalyzeOutput:
         distances_right, weights_right = compute_null_distribution(pi, cost_mat, 'right')
         print('\n\ndistances_right', distances_right.min(), distances_right.max(), '\n\n')
 
-        a_right, loc_right, scale_right = self.distribution.fit(distances_right)
-        print(a_right, loc_right, scale_right)
+        # a_right, loc_right, scale_right = self.distribution.fit(distances_right)
+        # print(a_right, loc_right, scale_right)
 
         plt.figure(figsize=(9, 9))
         right_freqs = plt.hist(distances_right, bins=100)[0]
@@ -280,13 +279,13 @@ class AnalyzeOutput:
         distances_both = np.array(list(distances_left) + list(distances_right))
         weights_both = np.array(list(weights_left) + list(weights_right))
         
-        a_both, loc_both, scale_both = self.distribution.fit(distances_both)
+        # a_both, loc_both, scale_both = self.distribution.fit(distances_both)
 
         significance_threshold = 0.95
 
-        self.gamma_a = a_both
-        self.gamma_loc = loc_both
-        self.gamma_scale = scale_both
+        # self.gamma_a = a_both
+        # self.gamma_loc = loc_both
+        # self.gamma_scale = scale_both
     
         bin_values_both = plt.hist(distances_both, weights=weights_both, bins = 100)
         pd.DataFrame({'Synthetic_spot_dist_both': distances_both}).to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/synthetic_spot_distances_both.csv')

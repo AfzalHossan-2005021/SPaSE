@@ -25,17 +25,10 @@ class PairwiseAlign():
         self.sample_right = config['sample_right']
         self.alpha = config['alpha']
         self.dissimilarity = config['dissimilarity']
-        self.pre_init_map_scheme = config['pre_init_map_scheme']
         self.init_map_scheme = config['init_map_scheme']
         self.numIterMaxEmd = config['numIterMaxEmd']
         self.numInnerIterMax = config['numInnerIterMax']
-        self.n_hvgs = config['n_hvgs']
-        self.n_pcs = config['n_pcs']
         self.use_gpu = config['use_gpu']
-        self.sample_left_hvg_h5_save_path = config['sample_left_hvg_h5_save_path']
-        self.sample_right_hvg_h5_save_path = config['sample_right_hvg_h5_save_path']
-        self.data_folder_path = config['data_folder_path']
-        self.preprocessing = config['preprocessing']
         self.results_path = config['results_path']
         self.config_file_name = os.path.basename(config['config_path'])
         self.sinkhorn = config['sinkhorn']
@@ -77,12 +70,7 @@ class PairwiseAlign():
 
         if self.init_map_scheme == 'uniform':
             pi_init = None
-        # elif self.init_map_scheme == 'spatial':
-        #     print('-------------------------- I\'m using spatial initialization ----------------------')
-        #     pi_init = pst.match_spots_using_spatial_heuristic(
-        #         self.adata_left.obsm['spatial'], self.adata_right.obsm['spatial'], use_ot=True)
-        # elif self.init_map_scheme == 'random':
-        #     pass
+            
         print("Calculating pi using gcg")
 
         # print("......... Attention!!! Need to pass in cost_mat_path! ........")
