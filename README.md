@@ -1,5 +1,5 @@
 # SPaSE
-SPaSE (Spatially-resolved Pathology ScorE), a tool designed to quantify pathological effects within an ST tissue sample incorporating an optimal transport problem formulation between the pathologically impacted and control reference ST samples, considering both gene expression and spatial spot locations.
+SPaSE (Spatially-resolved Pathology ScorE), a tool designed to quantify pathological effects within an Spatial Transcriptomics (ST) tissue sample incorporating an optimal transport problem formulation between the pathologically impacted and control reference ST samples, considering both gene expression and spatial spot locations.
 
 ### Built With
 [![Python][python-img]][python-url]
