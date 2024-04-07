@@ -30,7 +30,7 @@ SPaSE (Spatially-resolved Pathology ScorE), designed to quantify pathological ef
 
 <!-- USAGE EXAMPLES -->
 ## Prerequisite for Running The Method
-We utilized the [POT (Python OT)](https://pythonot.github.io/) package to calculate the optimal transport plan, specifically employing the ```sinkhorn_log``` method to address the entropic regularization optimal transport problem. To implement this change, navigate to the directory where your conda environments are stored. Proceed to the directory containing all the Python packages for the ```spase``` conda environment. Within that directory, locate the ```ot``` directory, where you'll find the ```bregman.py``` file. Adjust the initialization of the method variable to ```sinkhorn_log``` in this file. In my case, the path for ```bregman.py``` is ```/home/nuwaisir/miniconda3/envs/paste/lib/python3.8/site-packages/ot/bregman.py```. The modified function declaration should resemble the following:
+We utilized the [POT (Python OT)](https://pythonot.github.io/) package to calculate the optimal transport plan, specifically employing the ```sinkhorn_log``` method to address the entropic regularization optimal transport problem. To implement this change, navigate to the directory where your conda environments are stored. Proceed to the directory containing all the Python packages for the ```spase``` conda environment. Within that directory, locate the ```ot``` directory, where you'll find the ```bregman.py``` file. Adjust the initialization of the method variable to ```sinkhorn_log``` in this file. In my case, the path for ```bregman.py``` is ```/home/nuwaisir/miniconda3/envs/spase/lib/python3.8/site-packages/ot/bregman.py```. The modified function declaration should resemble the following:
 ```
 def sinkhorn(a, b, M, reg, method='sinkhorn_log', numItermax=1000,
              stopThr=1e-9, verbose=False, log=False, warn=True,
@@ -50,7 +50,7 @@ def sinkhorn(a, b, M, reg, method='sinkhorn_log', numItermax=1000,
 
 2. Place all the files inside ```Data/King/Fixed_adatas/```
 3. Naviage to ```Workspace/SPaSE/src/```
-4. The following command will reproduce the optimal transport plans and the pathological scores for each healthy disease sample pair. ```python rep_run.py```
+4. The following command will reproduce the optimal transport plans and the pathological scores for each healthy disease sample pair: ```python rep_run.py```
 5. If you want to run SPaSE on two samples of your choice, then inside ```run.py```, set the values of the following variable:
     - dataset [type: string]
     - adata_left_path [type: string; the path of the .h5ad file that would be used as reference]
@@ -60,6 +60,8 @@ def sinkhorn(a, b, M, reg, method='sinkhorn_log', numItermax=1000,
     - sample_right [type: string; name of the target sample]
     - alpha [type: double; hyperparameter]
     - lambda_sinkhorn [type: double; hyperparameter]
+    
+   Then run the following command: ```python run.py```
 6. The results will be stored inside ```Workspace/SPaSE/results/``` under the name you provide in the ```dataset``` variable.
 
 ## Reproducing Figures
