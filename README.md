@@ -1,17 +1,9 @@
 # SPaSE
-SPaSE (Spatially-resolved Pathology ScorE), designed to quantify pathological effects within an ST tissue sample incorporating an optimal transport problem formulation between the pathologically impacted and control reference ST samples, considering both gene expression and spatial spot locations.
-
-
+SPaSE (Spatially-resolved Pathology ScorE), a tool designed to quantify pathological effects within an ST tissue sample incorporating an optimal transport problem formulation between the pathologically impacted and control reference ST samples, considering both gene expression and spatial spot locations.
 
 ### Built With
-
 [![Python][python-img]][python-url]
 
-
-
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 ### Installation
@@ -26,9 +18,6 @@ SPaSE (Spatially-resolved Pathology ScorE), designed to quantify pathological ef
    conda env create -f environment.yml
    ```
 
-
-
-<!-- USAGE EXAMPLES -->
 ## Prerequisite for Running The Method
 We utilized the [POT (Python OT)](https://pythonot.github.io/) package to calculate the optimal transport plan, specifically employing the ```sinkhorn_log``` method to address the entropic regularization optimal transport problem. To implement this change, navigate to the directory where your conda environments are stored. Proceed to the directory containing all the Python packages for the ```spase``` conda environment. Within that directory, locate the ```ot``` directory, where you'll find the ```bregman.py``` file. Adjust the initialization of the method variable to ```sinkhorn_log``` in this file. In my case, the path for ```bregman.py``` is ```/home/nuwaisir/miniconda3/envs/spase/lib/python3.8/site-packages/ot/bregman.py```. The modified function declaration should resemble the following:
 ```
@@ -60,7 +49,7 @@ def sinkhorn(a, b, M, reg, method='sinkhorn_log', numItermax=1000,
     - sample_right [type: string; name of the target sample]
     - alpha [type: double; hyperparameter]
     - lambda_sinkhorn [type: double; hyperparameter]
-    
+
    Then run the following command: ```python run.py```
 6. The results will be stored inside ```Workspace/SPaSE/results/``` under the name you provide in the ```dataset``` variable.
 
