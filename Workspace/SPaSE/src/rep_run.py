@@ -12,7 +12,7 @@ cases = []
 datasets = ['King_fixed']
 
 sample_pairs = {
-    'King_fixed': [['Sham_1', 'D3_1'], ['Sham_1', 'D3_3'], ['Sham_1', 'D7_2'], ['Sham_1', 'D7_3']],
+    'King_fixed': [['Sham_1', '1hr'], ['Sham_1', '4hr'], ['Sham_1', 'D3_1'], ['Sham_1', 'D3_3'], ['Sham_1', 'D7_2'], ['Sham_1', 'D7_3']],
 }
 
 sample_alpha_map = {

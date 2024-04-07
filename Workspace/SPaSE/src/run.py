@@ -10,6 +10,9 @@ sample_left = 'Test_left'
 sample_right = 'Test_right'
 alpha = 0.001
 lambda_sinkhorn = 0.01
+
+
+
 sinkhorn = 1
 dissimilarity = 'js'
 

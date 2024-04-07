@@ -7,4 +7,5 @@ Workspace/SPaSE/local_data/
 Workspace/SPaSE/results/
 Workspace/SPaSE/notebooks/*
 !Workspace/SPaSE/notebooks/Figure_generation
+Manuscript
 .gitignore
