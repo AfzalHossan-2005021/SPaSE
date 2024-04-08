@@ -9,7 +9,7 @@ import warnings
 from .DataLoader import DataLoader
 from .Preprocessor import Preprocessor
 import os
-from .utils import plot_slice_pairwise_alignment_modified, calculate_cost_matrix, mirror, rotate, get_2hop_adatas, compute_null_distribution, visualize_goodness_of_mapping, scale_coords, QC
+from .utils import plot_slice_pairwise_alignment_modified, calculate_cost_matrix, mirror, rotate, get_2hop_adatas, compute_null_distribution, visualize_goodness_of_mapping, scale_coords, QC, paste_pairwise_align_modified
 from scipy.stats import variation
 import scanpy as sc
 import json
@@ -225,7 +225,7 @@ class AnalyzeOutput:
 
         if self.sinkhorn:
             pi_low_entropy = None
-            pi, fgw_dist = pst.pairwise_align_modified(adata_0,
+            pi, fgw_dist = paste_pairwise_align_modified(adata_0,
                                              adata_1,
                                              alpha=self.alpha,
                                              G_init=pi_low_entropy,
@@ -244,7 +244,7 @@ class AnalyzeOutput:
             
         else:
             print('sinkhorn not used')
-            pi = pst.pairwise_align_modified(adata_0, adata_1,alpha=self.alpha,G_init=None,numItermax=10000,dissimilarity=self.dissimilarity,sinkhorn=self.sinkhorn,cost_mat_path=cost_mat_path,verbose=False,backend=backend,use_gpu=use_gpu, norm=True, numItermaxEmd=self.numIterMaxEmd)
+            pi = paste_pairwise_align_modified(adata_0, adata_1,alpha=self.alpha,G_init=None,numItermax=10000,dissimilarity=self.dissimilarity,sinkhorn=self.sinkhorn,cost_mat_path=cost_mat_path,verbose=False,backend=backend,use_gpu=use_gpu, norm=True, numItermaxEmd=self.numIterMaxEmd)
 
         cost_mat = np.load(cost_mat_path)
 
