@@ -112,6 +112,9 @@ for case in tqdm(cases):
         config_file_name += f'_alpha_{alpha}.json'
 
     config_path = f'../../../Workspace/SPaSE/configs/{config_file_name}'
+
+    os.makedirs(os.path.dirname(config_path), exist_ok=True)
+
     with open(f'{config_path}', 'w') as config_file:
         json.dump(config, config_file, indent=4)
 
