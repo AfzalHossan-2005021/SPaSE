@@ -17,6 +17,10 @@ SPaSE (Spatially-resolved Pathology ScorE), a tool designed to quantify patholog
    ```
    conda env create -f environment.yml
    ```
+4. Activate the conda environment:
+   ```
+   conda activate spase
+   ```
 3. If you get errors while installing the conda environment, install the 0.8.2 version of the POT module using pip.
    ```
    pip install POT==0.8.2
