@@ -26,7 +26,7 @@ SPaSE (Spatially-resolved Pathology ScorE), a tool designed to quantify patholog
    pip install POT==0.8.2
    ```
 
-## Prerequisite for Running The Method
+## Prerequisite for Reproducing Pathological Scores
 We utilized the [POT (Python OT)](https://pythonot.github.io/) package to calculate the optimal transport plan, specifically employing the ```sinkhorn_log``` method to address the entropic regularization optimal transport problem. To implement this change, navigate to the directory where your conda environments are stored. Proceed to the directory containing all the Python packages for the ```spase``` conda environment. Within that directory, locate the ```ot``` directory, where you'll find the ```bregman.py``` file. Adjust the initialization of the method variable to ```sinkhorn_log``` in this file. In my case, the path for ```bregman.py``` is ```/home/nuwaisir/miniconda3/envs/spase/lib/python3.8/site-packages/ot/bregman.py```. The modified function declaration should resemble the following:
 ```
 def sinkhorn(a, b, M, reg, method='sinkhorn_log', numItermax=1000,
