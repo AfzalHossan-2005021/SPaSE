@@ -14,7 +14,7 @@ import scanpy as sc
 import sklearn
 import networkx as nx
 import ot
-import paste as pst
+# import paste as pst
 from tqdm import tqdm
 import json
 import os
@@ -715,13 +715,13 @@ def get_2hop_adatas(adata):
     adata_1 = adata[idxs_1_2hop]
     return adata_0, adata_1
 
-def apply_PASTE(adata_left, adata_right, alpha=0.1):
-    # alpha = 0.1
-    try:
-        pi = pst.pairwise_align(adata_left, adata_right,alpha=alpha,G_init=None,numItermax=10000,verbose=False,backend=ot.backend.TorchBackend(),use_gpu=torch.cuda.is_available())
-    except:
-        pi = pst.pairwise_align(adata_left, adata_right,alpha=alpha,G_init=None,numItermax=10000,verbose=False)
-    return pi
+# def apply_PASTE(adata_left, adata_right, alpha=0.1):
+#     # alpha = 0.1
+#     try:
+#         pi = pst.pairwise_align(adata_left, adata_right,alpha=alpha,G_init=None,numItermax=10000,verbose=False,backend=ot.backend.TorchBackend(),use_gpu=torch.cuda.is_available())
+#     except:
+#         pi = pst.pairwise_align(adata_left, adata_right,alpha=alpha,G_init=None,numItermax=10000,verbose=False)
+#     return pi
 
 def compute_null_distribution(pi, cost_mat, scheme):
     if scheme == 'all_edges':
