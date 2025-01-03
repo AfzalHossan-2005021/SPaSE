@@ -50,9 +50,14 @@ class AnalyzeOutput:
             data_loader = DataLoader(config)
 
             dataset_map = data_loader.read_data(self.dataset)
-            
+            print('----------------------------------')
+            print(self.sample_left)
+            print(self.sample_right)
+            print('----------------------------------')
             self.adata_left = dataset_map[self.sample_left]
             self.adata_right = dataset_map[self.sample_right]
+        
+        print("here:", self.adata_left.n_obs)
 
         # self.distribution = gamma
         # self.gamma_a = 0
@@ -147,7 +152,15 @@ class AnalyzeOutput:
             adata_to_be_synthesized = sc.read(self.config['adata_to_be_synthesized_path'])
         else:
             adata_to_be_synthesized = self.adata_left.copy()
-        right_threshold = self.get_goodness_threshold_from_null_distribution(adata_to_be_synthesized)
+
+        adata_healthy_right = 'None'
+        decompose = True
+        if self.config['adata_healthy_right_path'] != 'None':
+            decompose = False
+            adata_healthy_right = sc.read(self.config['adata_healthy_right_path'])
+
+        right_threshold = self.get_goodness_threshold_from_null_distribution(adata_to_be_synthesized, adata_healthy_right, decompose=decompose)
+
         # p_values = np.array(list(map(lambda x: self.get_p_value_wrt_gamma(x, self.gamma_a, self.gamma_loc, self.gamma_scale), self.adata_right.obs['pathological_score'].values)))
         # is_remodeled = np.array([0] * self.adata_right.n_obs)
         # is_remodeled[np.where(p_values < 0.05)[0]] = 1
@@ -173,8 +186,8 @@ class AnalyzeOutput:
         plt.savefig(f'{self.results_path}/{self.dataset}/{self.config_file_name}/segmentation_based_on_discrete_distribution.jpg')
         plt.close()
 
-        os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
-        self.adata_right.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_right_processed.h5ad')
+        # os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
+        # self.adata_right.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_right_processed.h5ad')
 
         pi_right_to_left = self.pi.T
         region_col = self.adata_right.obs['region'].values
@@ -205,12 +218,19 @@ class AnalyzeOutput:
             # df_F1_score_gamma = pd.DataFrame({'F1_score': [F1_score_gamma]})
             # df_F1_score_gamma.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/F1_score_gamma.csv')
 
-        os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
-        self.adata_left.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_left_processed.h5ad')
+        # os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
+        # self.adata_left.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_left_processed.h5ad')
 
-    def get_goodness_threshold_from_null_distribution(self, adata):
+    def get_goodness_threshold_from_null_distribution(self, adata, adata_2='None', decompose=True):
         print("\nSynthesizing the healthy sample\n")
-        adata_0, adata_1 = get_2hop_adatas(adata)
+        if decompose:
+            adata_0, adata_1 = get_2hop_adatas(adata)
+        else:
+            adata_0 = adata
+            adata_1 = adata_2
+
+            print(adata_0.n_obs)
+            print(adata_1.n_obs)
 
         backend = ot.backend.NumpyBackend()
         use_gpu = False
@@ -218,10 +238,13 @@ class AnalyzeOutput:
             backend = ot.backend.TorchBackend()
             use_gpu = True
         
-        cost_mat_path = f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/cost_mat_{self.sample_left}_0_{self.sample_left}_1_{self.dissimilarity}.npy'
+        if decompose:
+            cost_mat_path = f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/cost_mat_{self.sample_left}_0_{self.sample_left}_1_{self.dissimilarity}.npy'
+        else:
+            cost_mat_path = f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/cost_mat_Sham_1_Sham_2_{self.dissimilarity}.npy'
         os.makedirs(os.path.dirname(cost_mat_path), exist_ok=True)
         # pi_low_entropy_path = f'{self.results_path}/{self.dataset}/config_{self.dataset}_{self.sample_left}_vs_{self.sample_right}_js.json/Pis/{self.dataset}_synthetic_left_right_low_entropy.npy'
-
+        plt.switch_backend('agg')
         if self.sinkhorn:
             pi_low_entropy = None
             pi, fgw_dist = paste_pairwise_align_modified(adata_0,
@@ -239,7 +262,7 @@ class AnalyzeOutput:
                                              backend=backend,
                                              use_gpu=use_gpu,
                                              numInnerItermax=self.numInnerIterMax)
-            np.save(f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/pi_adata_0_vs_adata_1_alpha_{self.alpha}_lambda_{self.lambda_sinkhorn}.npy', pi)
+            # np.save(f'{self.results_path}/../local_data/{self.dataset}/{self.sample_left}/pi_adata_0_vs_adata_1_alpha_{self.alpha}_lambda_{self.lambda_sinkhorn}.npy', pi)
             
         else:
             print('sinkhorn not used')
@@ -255,6 +278,8 @@ class AnalyzeOutput:
         
 
         plt.figure(figsize=(9, 9))
+        plt.tick_params(axis='x', labelsize=15)
+        plt.tick_params(axis='y', labelsize=15)
         left_freqs = plt.hist(distances_left, bins=100)[0]
         
         os.makedirs(f'{self.results_path}/{self.dataset}/{self.config_file_name}/Histograms/', exist_ok=True)
@@ -267,6 +292,8 @@ class AnalyzeOutput:
         # print(a_right, loc_right, scale_right)
 
         plt.figure(figsize=(9, 9))
+        plt.tick_params(axis='x', labelsize=15)
+        plt.tick_params(axis='y', labelsize=15)
         right_freqs = plt.hist(distances_right, bins=100)[0]
 
         os.makedirs(f'{self.results_path}/{self.dataset}/{self.config_file_name}/Histograms/', exist_ok=True)

@@ -1,15 +1,30 @@
 import os
 import json
 from tqdm import tqdm
+import argparse
 
-dataset = 'Test'
-adata_left_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
-adata_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
-adata_to_be_synthesized_path = adata_left_path
-sample_left = 'Test_left'
-sample_right = 'Test_right'
-alpha = 0.001
-lambda_sinkhorn = 0.01
+parser = argparse.ArgumentParser(prog='SPaSE')
+parser.add_argument('-a', '--alpha')
+parser.add_argument('-l', '--lambda_sinkhorn')
+
+args = parser.parse_args()
+
+
+
+
+dataset = 'Mouse_DMD'
+adata_left_path = '/home/nuwaisir/Corridor/SPaSE/Data/Mouse_DMD/Fixed_adatas/DBA2J_adata.h5ad'
+adata_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/Mouse_DMD/Fixed_adatas/D2mdx_adata.h5ad'
+
+adata_healthy_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/Mouse_DMD/Fixed_adatas/C57BL10_adata.h5ad'
+adata_to_be_synthesized_path = 'None'
+
+
+
+sample_left = adata_left_path.split('/')[-1].split('.')[0]
+sample_right = adata_right_path.split('/')[-1].split('.')[0]
+alpha = float(args.alpha)
+lambda_sinkhorn = float(args.lambda_sinkhorn)
 
 
 
@@ -19,7 +34,7 @@ dissimilarity = 'js'
 mode = 1
 
 numIterMaxEmd = 1000000
-numInnerIterMax = 100
+numInnerIterMax = 10000
 init_map_scheme = "uniform"
 use_gpu = 1
 QC = 0
@@ -32,6 +47,7 @@ config = {
     "adata_left_path": adata_left_path,
     "adata_right_path": adata_right_path,
     "adata_to_be_synthesized_path": adata_to_be_synthesized_path,
+    "adata_healthy_right_path": adata_healthy_right_path,
     "sinkhorn": sinkhorn,
     "lambda_sinkhorn": lambda_sinkhorn,
     "dissimilarity": dissimilarity,

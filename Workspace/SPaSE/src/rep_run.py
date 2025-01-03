@@ -12,7 +12,7 @@ cases = []
 datasets = ['King_fixed']
 
 sample_pairs = {
-    'King_fixed': [['Sham_1', '1hr'], ['Sham_1', '4hr'], ['Sham_1', 'D3_1'], ['Sham_1', 'D3_3'], ['Sham_1', 'D7_2'], ['Sham_1', 'D7_3']],
+    'King_fixed': [['Sham_2', '1hr'], ['Sham_2', '4hr'], ['Sham_2', 'D3_1'], ['Sham_2', 'D3_3'], ['Sham_2', 'D7_2'], ['Sham_2', 'D7_3']],
 }
 
 sample_alpha_map = {
@@ -89,7 +89,8 @@ for case in tqdm(cases):
         "sample_right": sample_right,
         "adata_left_path": adata_left_path,
         "adata_right_path": adata_right_path,
-        "adata_to_be_synthesized_path": adata_to_be_synthesized_path,
+        "adata_to_be_synthesized_path": 'None',
+        "adata_healthy_right_path": "../../../Data/King/Fixed_adatas/adata_Sham_1.h5ad",
         "sinkhorn": sinkhorn,
         "lambda_sinkhorn": lambda_sinkhorn,
         "dissimilarity": dissimilarity,

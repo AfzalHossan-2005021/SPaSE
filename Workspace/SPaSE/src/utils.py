@@ -74,6 +74,10 @@ def paste_pairwise_align_modified(
             
             - Objective function output of FGW-OT.
         """
+
+        print("---------------------------------------")
+        print('Inside paste_pairwise_align_modified')
+        print("---------------------------------------")
         
         # Determine if gpu or cpu is being used
         if use_gpu:
@@ -197,7 +201,9 @@ def my_fused_gromov_wasserstein_gcg(M, C1, C2, p, q, lambda_sinkhorn=1, G_init =
         
         For more info, see: https://pythonot.github.io/gen_modules/ot.gromov.html
         """
-        # print("Inside my_fused_gromov_wasserstein_gcg")
+        print("---------------------------------------")
+        print("Inside my_fused_gromov_wasserstein_gcg")
+        print("---------------------------------------")
         # print(f'alpha: {alpha}')
 
         p, q = ot.utils.list_to_array(p, q)
@@ -231,6 +237,7 @@ def my_fused_gromov_wasserstein_gcg(M, C1, C2, p, q, lambda_sinkhorn=1, G_init =
         if log:
             # print('doing gcg')
             # print((1 - alpha) * M)
+            print('log true')
             res, log = ot.optim.gcg(p, q, M, lambda_sinkhorn, alpha, f, df, G0, log=True, **kwargs)
             # res, log = ot.gromov.cg(p, q, (1 - alpha) * M, alpha, f, df, G0, armijo=armijo, C1=C1, C2=C2, constC=constC, log=True, **kwargs)
 
@@ -244,6 +251,7 @@ def my_fused_gromov_wasserstein_gcg(M, C1, C2, p, q, lambda_sinkhorn=1, G_init =
         else:
             # return ot.gromov.cg(p, q, (1 - alpha) * M, alpha, f, df, G0, armijo=armijo, C1=C1, C2=C2, constC=constC, **kwargs)
             # print('pi before gcg')
+            print('log false')
             pi = ot.optim.gcg(p, q, M, lambda_sinkhorn, alpha, f, df, G0, log=False, **kwargs)
             # print('pi after gcg')
             return pi, -1

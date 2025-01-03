@@ -253,8 +253,12 @@ class DataLoader():
                 f'{self.data_folder_path}/King/Fixed_adatas/adata_Sham_1.h5ad')
             adata_Sham_1.var_names_make_unique()
 
+            adata_Sham_2 = sc.read(
+                f'{self.data_folder_path}/King/Fixed_adatas/adata_Sham_2.h5ad')
+            adata_Sham_2.var_names_make_unique()
+
             return {
-                'Sham_1': adata_Sham_1, '1hr': adata_1hr, '4hr': adata_4hr, 'D3_1': adata_D3_1, 'D3_3': adata_D3_3, 'D7_2': adata_D7_2, 'D7_3': adata_D7_3
+                'Sham_1': adata_Sham_1, 'Sham_2': adata_Sham_2, '1hr': adata_1hr, '4hr': adata_4hr, 'D3_1': adata_D3_1, 'D3_3': adata_D3_3, 'D7_2': adata_D7_2, 'D7_3': adata_D7_3
             }
         elif dataset == 'Human_heart':
             adata_control_P1 = sc.read(
@@ -809,6 +813,7 @@ class DataLoader():
             }
         elif dataset == 'King_gene_exp_turned_off':
             adata_Sham_1 = sc.read('/home/nuwaisir/Corridor/Samee_sir_lab/Data/King/Fixed_adatas/adata_Sham_1.h5ad')
+            adata_Sham_2 = sc.read('/home/nuwaisir/Corridor/Samee_sir_lab/Data/King/Fixed_adatas/adata_Sham_2.h5ad')
             adata_d3_3 = sc.read('/home/nuwaisir/Corridor/Samee_sir_lab/Data/King/Fixed_adatas/adata_D3_3.h5ad')
             adata_d3_3_adata_D3_3_Prelid1_Arg1_S100a8_turned_off = sc.read('/home/nuwaisir/Corridor/Samee_sir_lab/Data/King/Fixed_adatas/adata_D3_3_Prelid1_Arg1_S100a8_turned_off.h5ad')
             adata_d3_3_adata_D3_3_Got2_turned_off = sc.read('/home/nuwaisir/Corridor/Samee_sir_lab/Data/King/Fixed_adatas/adata_D3_3_Got2_turned_off.h5ad')
@@ -823,6 +828,7 @@ class DataLoader():
 
             return {
                 'adata_Sham_1': adata_Sham_1,
+                'adata_Sham_2': adata_Sham_2,
                 'adata_Sham_1_hvg_2000': adata_Sham_1_hvg_2000,
                 'adata_d3_3': adata_d3_3,
                 'adata_d3_3_Prelid1_Arg1_S100a8_turned_off': adata_d3_3_adata_D3_3_Prelid1_Arg1_S100a8_turned_off,
