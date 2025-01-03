@@ -9,6 +9,7 @@ Workspace/SPaSE/local_data/
 Workspace/SPaSE/results/
 Workspace/SPaSE/notebooks/*
 !Workspace/SPaSE/notebooks/Figure_generation
+!Workspace/SPaSE/notebooks/Enrichment_score
 Workspace/SPaSE/notebooks/Enrichment_score/*
 !Workspace/SPaSE/notebooks/Enrichment_score/calculate_enrichment.py
 !Workspace/SPaSE/notebooks/Enrichment_score/enrichment_check.ipynb
