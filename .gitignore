@@ -7,6 +7,8 @@ Data/King/From_Calcagno_et_al/*
 Workspace/SPaSE/configs/
 Workspace/SPaSE/local_data/
 Workspace/SPaSE/results/
+Workspace/SPaSE/Figures
+Workspace/SPaSE/to_Abid_bhaiya/
 Workspace/SPaSE/notebooks/*
 !Workspace/SPaSE/notebooks/Figure_generation
 !Workspace/SPaSE/notebooks/Enrichment_score
@@ -16,5 +18,4 @@ Workspace/SPaSE/notebooks/Enrichment_score/*
 !Workspace/SPaSE/notebooks/Enrichment_score/enrichment_scores.py
 Manuscript
 SPaSE_review
-Workspace/SPaSE/Figures
 .gitignore
