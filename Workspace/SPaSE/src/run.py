@@ -12,12 +12,12 @@ args = parser.parse_args()
 
 
 
-dataset = 'Mouse_DMD'
-adata_left_path = '/home/nuwaisir/Corridor/SPaSE/Data/Mouse_DMD/Fixed_adatas/DBA2J_adata.h5ad'
-adata_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/Mouse_DMD/Fixed_adatas/D2mdx_adata.h5ad'
+dataset = 'Mouse_heart_test'
+adata_left_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
+adata_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_D3_3.h5ad'
 
-adata_healthy_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/Mouse_DMD/Fixed_adatas/C57BL10_adata.h5ad'
-adata_to_be_synthesized_path = 'None'
+adata_healthy_right_path = 'None'
+adata_to_be_synthesized_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
 
 
 

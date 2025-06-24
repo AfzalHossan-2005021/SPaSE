@@ -82,5 +82,5 @@ class PairwiseAlign():
                 pi = torch.from_numpy(pi)
             return pi, -1000
         
-        pi, fgw_dist = paste_pairwise_align_modified(self.adata_left,self.adata_right,alpha=self.alpha,sinkhorn=self.sinkhorn,lambda_sinkhorn=self.lambda_sinkhorn,dissimilarity=self.dissimilarity,G_init=pi_init, numItermax=10000,cost_mat_path=self.cost_mat_path,return_obj=True,norm=True,verbose=False,backend=backend,use_gpu=self.use_gpu,numInnerItermax=self.numInnerIterMax)
+        pi, fgw_dist = paste_pairwise_align_modified(self.adata_left,self.adata_right,alpha=self.alpha,sinkhorn=self.sinkhorn,lambda_sinkhorn=self.lambda_sinkhorn,dissimilarity=self.dissimilarity,G_init=pi_init, numItermax=10000,cost_mat_path=self.cost_mat_path,return_obj=True,norm=True,verbose=False,backend=backend,use_gpu=self.use_gpu,numInnerItermax=self.numInnerIterMax, method='sinkhorn_log')
         return pi, fgw_dist
