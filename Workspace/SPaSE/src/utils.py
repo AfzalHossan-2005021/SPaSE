@@ -23,8 +23,6 @@ import warnings
 import torch
 from anndata import AnnData
 
-style.use('seaborn-white')
-
 
 
 def paste_pairwise_align_modified(
