@@ -4,8 +4,8 @@ from tqdm import tqdm
 import argparse
 
 parser = argparse.ArgumentParser(prog='SPaSE')
-parser.add_argument('-h', '--healthy')
-parser.add_argument('-d', '--diseased')
+parser.add_argument('-healthy', '--healthy')
+parser.add_argument('-diseased', '--diseased')
 parser.add_argument('-a', '--alpha')
 parser.add_argument('-l', '--lambda_sinkhorn')
 
