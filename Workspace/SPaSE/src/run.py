@@ -13,11 +13,11 @@ args = parser.parse_args()
 
 
 dataset = 'Mouse_heart_test'
-adata_left_path = args.h
-adata_right_path = args.d
+adata_left_path = args.healthy
+adata_right_path = args.diseased
 
 adata_healthy_right_path = 'None'
-adata_to_be_synthesized_path = args.h
+adata_to_be_synthesized_path = args.healthy
 
 
 
