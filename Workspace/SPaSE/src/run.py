@@ -4,20 +4,20 @@ from tqdm import tqdm
 import argparse
 
 parser = argparse.ArgumentParser(prog='SPaSE')
+parser.add_argument('-h', '--healthy')
+parser.add_argument('-d', '--diseased')
 parser.add_argument('-a', '--alpha')
 parser.add_argument('-l', '--lambda_sinkhorn')
 
 args = parser.parse_args()
 
 
-
-
 dataset = 'Mouse_heart_test'
-adata_left_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
-adata_right_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_D3_3.h5ad'
+adata_left_path = args.h
+adata_right_path = args.d
 
 adata_healthy_right_path = 'None'
-adata_to_be_synthesized_path = '/home/nuwaisir/Corridor/SPaSE/Data/King/Fixed_adatas/adata_Sham_1.h5ad'
+adata_to_be_synthesized_path = args.h
 
 
 
