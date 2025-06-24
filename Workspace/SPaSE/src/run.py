@@ -4,6 +4,7 @@ from tqdm import tqdm
 import argparse
 
 parser = argparse.ArgumentParser(prog='SPaSE')
+parser.add_argument('-dir_name', '--dir_name')
 parser.add_argument('-healthy', '--healthy')
 parser.add_argument('-diseased', '--diseased')
 parser.add_argument('-a', '--alpha')
@@ -12,7 +13,7 @@ parser.add_argument('-l', '--lambda_sinkhorn')
 args = parser.parse_args()
 
 
-dataset = 'Mouse_heart_test'
+dataset = args.dir_name
 adata_left_path = args.healthy
 adata_right_path = args.diseased
 

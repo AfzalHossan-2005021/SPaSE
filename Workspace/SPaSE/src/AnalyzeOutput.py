@@ -129,15 +129,15 @@ class AnalyzeOutput:
         f, ax = plt.subplots()
         plt.figure(figsize=(9, 9))
         ax.axis('off')
-        points = ax.scatter(-adata.obsm['spatial'][:, 0], -adata.obsm['spatial'][:, 1], s=10, c=-adata.obs['pathological_score'].values, cmap='plasma')
+        points = ax.scatter(-adata.obsm['spatial'][:, 0], -adata.obsm['spatial'][:, 1], s=10, c=adata.obs['pathological_score'].values, cmap='plasma_r')
         if invert_x:
             f.gca().invert_xaxis()
         f.colorbar(points)
         config_file_name = os.path.basename(self.config['config_path'])
-        os.makedirs(f'{self.results_path}/{self.dataset}/{config_file_name}/Goodness_score/', exist_ok=True)
-        f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Goodness_score/{sample_name}_goodness_of_mapping.jpg',format='jpg',dpi=350,bbox_inches='tight',pad_inches=0)
-        f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Goodness_score/{sample_name}_goodness_of_mapping.eps',format='eps',dpi=350,bbox_inches='tight',pad_inches=0)
-        f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Goodness_score/{sample_name}_goodness_of_mapping.svg',format='svg',dpi=350,bbox_inches='tight',pad_inches=0)
+        os.makedirs(f'{self.results_path}/{self.dataset}/{config_file_name}/Pathology_score/', exist_ok=True)
+        f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Pathology_score/{sample_name}_pathology_score.jpg',format='jpg',dpi=350,bbox_inches='tight',pad_inches=0)
+        f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Pathology_score/{sample_name}_pathology_score.eps',format='eps',dpi=350,bbox_inches='tight',pad_inches=0)
+        f.savefig(f'{self.results_path}/{self.dataset}/{config_file_name}/Pathology_score/{sample_name}_pathology_score.svg',format='svg',dpi=350,bbox_inches='tight',pad_inches=0)
         plt.close()
 
     # def get_p_value_wrt_gamma(self, val, a, loc, scale):
