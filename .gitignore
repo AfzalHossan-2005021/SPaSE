@@ -2,6 +2,7 @@ Data/King/Fixed_adatas/*
 Data/Mouse_brain/
 Data/Mouse_DMD/
 !Data/King/Fixed_adatas/google_drive_link.txt
+!Data/King/Fixed_adatas/Data_zip.zip
 Data/King/From_Calcagno_et_al/*
 !Data/King/From_Calcagno_et_al/Spatial_object_integrated@meta.data.csv
 Workspace/SPaSE/configs/
