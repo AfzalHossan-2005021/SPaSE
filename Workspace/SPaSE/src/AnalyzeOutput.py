@@ -154,7 +154,7 @@ class AnalyzeOutput:
             adata_to_be_synthesized = self.adata_left.copy()
 
         # adata_healthy_right = 'None'
-        if self.config['adata_healthy_right'] == 'None':
+        if self.config['adata_healthy_right_path'] == 'None':
             decompose = True
         else:
             decompose = False

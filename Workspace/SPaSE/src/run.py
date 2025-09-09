@@ -87,6 +87,7 @@ with open(f'../../../Workspace/SPaSE/configs/{config_file_name}') as f:
     config = json.load(f)
 
 config['mode'] = 2
+config['adata_healthy_right_path'] = adata_healthy_right_path
 
 with open(f'{config_path}', 'w') as config_file:
     json.dump(config, config_file, indent=4)
