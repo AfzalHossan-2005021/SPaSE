@@ -5,25 +5,20 @@ import argparse
 
 parser = argparse.ArgumentParser(prog='SPaSE')
 parser.add_argument('-d', '--dataset')
-parser.add_argument('-l1', '--healthy')
-parser.add_argument('-l2', '--healthy_right', default="None")
-parser.add_argument('-r', '--healthy_right')
+parser.add_argument('-l1', '--adata_left_path')
+parser.add_argument('-l2', '--adata_healthy_right_path')
+parser.add_argument('-r', '--adata_right_path')
 
 
 
 args = parser.parse_args()
 
 dataset = args.dataset
-adata_left_path = args.healthy
-adata_right_path = args.healthy_right
+adata_left_path = args.adata_left_path
+adata_right_path = args.adata_right_path
 
 adata_healthy_right_path = args.adata_healthy_right_path
-
-if adata_healthy_right_path == 'None':
-    adata_to_be_synthesized_path = args.healthy
-else:
-    adata_to_be_synthesized_path = 'None'
-
+adata_to_be_synthesized_path = adata_left_path
 
 
 sample_left = adata_left_path.split('/')[-1].split('.')[0]
@@ -88,7 +83,6 @@ for alpha in alphas:
             config = json.load(f)
 
         config['mode'] = 2
-        config['adata_healthy_right_path'] = adata_healthy_right_path
 
         with open(f'{config_path}', 'w') as config_file:
             json.dump(config, config_file, indent=4)
