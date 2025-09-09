@@ -153,10 +153,13 @@ class AnalyzeOutput:
         else:
             adata_to_be_synthesized = self.adata_left.copy()
 
-        adata_healthy_right = 'None'
-        decompose = True
-        if self.config['adata_healthy_right_path'] != 'None':
+        # adata_healthy_right = 'None'
+        if self.config['adata_healthy_right'] == 'None':
+            decompose = True
+        else:
             decompose = False
+            
+        if self.config['adata_healthy_right_path'] != 'None':
             adata_healthy_right = sc.read(self.config['adata_healthy_right_path'])
 
         right_threshold = self.get_goodness_threshold_from_null_distribution(adata_to_be_synthesized, adata_healthy_right, decompose=decompose)

@@ -6,6 +6,7 @@ import argparse
 parser = argparse.ArgumentParser(prog='SPaSE')
 parser.add_argument('-dir_name', '--dir_name')
 parser.add_argument('-healthy', '--healthy')
+parser.add_argument('-healthy_right', '--healthy_right', default="None")
 parser.add_argument('-diseased', '--diseased')
 parser.add_argument('-a', '--alpha')
 parser.add_argument('-l', '--lambda_sinkhorn')
@@ -17,9 +18,12 @@ dataset = args.dir_name
 adata_left_path = args.healthy
 adata_right_path = args.diseased
 
-adata_healthy_right_path = 'None'
-adata_to_be_synthesized_path = args.healthy
+adata_healthy_right_path = args.healthy_right
 
+if adata_healthy_right_path == 'None':
+    adata_to_be_synthesized_path = args.healthy
+else:
+    adata_to_be_synthesized_path = 'None'
 
 
 sample_left = adata_left_path.split('/')[-1].split('.')[0]
