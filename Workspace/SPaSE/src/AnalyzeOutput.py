@@ -207,20 +207,6 @@ class AnalyzeOutput:
 
         self.fig_hist_rs.savefig(f'{self.results_path}/{self.dataset}/{self.config_file_name}/rs_distribution_both_both_samples.jpg')
 
-        if self.grid_search:
-            actual = self.adata_right.obs['is_remodeled_for_grid_search'].values
-            predicted = np.array(list(map(lambda x: 1 if x == 'bad' else 0, self.adata_right.obs['region'].values)))
-            # predicted_gamma = is_remodeled # prediction from the fitted gamma distribution
-
-            F1_score = metrics.f1_score(actual, predicted)
-            # F1_score_gamma = metrics.f1_score(actual, predicted_gamma)
-
-            df_F1_score = pd.DataFrame({'F1_score': [F1_score]})
-            df_F1_score.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/F1_score.csv')
-
-            # df_F1_score_gamma = pd.DataFrame({'F1_score': [F1_score_gamma]})
-            # df_F1_score_gamma.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/F1_score_gamma.csv')
-
         # os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
         # self.adata_left.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_left_processed.h5ad')
 
