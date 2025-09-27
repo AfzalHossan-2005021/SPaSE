@@ -5,9 +5,11 @@ import argparse
 
 parser = argparse.ArgumentParser(prog='SPaSE')
 parser.add_argument('-d', '--dataset')
-parser.add_argument('-l1', '--adata_left_path')
-parser.add_argument('-l2', '--adata_healthy_right_path')
+parser.add_argument('-l', '--adata_left_path')
 parser.add_argument('-r', '--adata_right_path')
+parser.add_argument('-hr', '--adata_healthy_right_path', default='None')
+parser.add_argument('-s', '--adata_to_be_synthesized_path', default='None')
+parser.add_argument('-g', '--use_gpu', default=1)
 
 
 
@@ -18,7 +20,7 @@ adata_left_path = args.adata_left_path
 adata_right_path = args.adata_right_path
 
 adata_healthy_right_path = args.adata_healthy_right_path
-adata_to_be_synthesized_path = adata_left_path
+adata_to_be_synthesized_path = args.adata_to_be_synthesized_path
 
 
 sample_left = adata_left_path.split('/')[-1].split('.')[0]
@@ -37,7 +39,7 @@ for alpha in alphas:
         numIterMaxEmd = 1000000
         numInnerIterMax = 10000
         init_map_scheme = "uniform"
-        use_gpu = 1
+        use_gpu = int(args.use_gpu)
         QC = 0
 
         config = {
