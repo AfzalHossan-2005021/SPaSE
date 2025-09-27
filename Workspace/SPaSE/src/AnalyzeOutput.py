@@ -291,6 +291,10 @@ class AnalyzeOutput:
         p_value = stats.kstest(left_freqs, right_freqs)[1]
         print('KS test pvalue:', p_value)
 
+        # save the p_value to a csv file
+        df_p_value = pd.DataFrame({'KS_test_p_value': [p_value]})
+        df_p_value.to_csv(f'{self.results_path}/{self.dataset}/{self.config_file_name}/KS_test_p_value.csv')
+
         distances_both = np.array(list(distances_left) + list(distances_right))
         weights_both = np.array(list(weights_left) + list(weights_right))
         
