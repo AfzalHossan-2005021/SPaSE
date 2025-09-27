@@ -19,12 +19,9 @@ Workspace/SPaSE/notebooks/Enrichment_score/*
 !Workspace/SPaSE/notebooks/Enrichment_score/enrichment_scores.py
 Manuscript
 SPaSE_review
-.gitignore
 .env
-__pycache__/*
 *__pycache__*
-*.pkl
-*.pyc
-.ipynb_checkpoints/*
-.DS_Store
+*/local_data/*
+*/results/*
+*/configs/*
 .vscode/*
