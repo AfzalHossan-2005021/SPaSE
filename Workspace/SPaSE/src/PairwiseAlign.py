@@ -11,7 +11,6 @@ from .DataLoader import DataLoader
 from .Preprocessor import Preprocessor
 from .utils import trim_barcode, make_format, norm_and_center_coordinates, rotate, mirror, euc_dist, plot_slice_pairwise_alignment_modified, scale_coords, QC, to_dense_array, extract_data_matrix, intersect, kl_divergence_backend, jensenshannon_divergence_backend, paste_pairwise_align_modified
 import os
-from .paste_helper_functions import match_spots_using_spatial_heuristic
 import json
 import scanpy as sc
 
