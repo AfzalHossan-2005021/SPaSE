@@ -447,10 +447,7 @@ def jensenshannon_divergence_backend(X, Y):
     print("Finished calculating cost matrix")
     print(nx.unique(nx.isnan(js_dist)))
 
-    if torch.cuda.is_available():
-        return js_dist.cpu().detach().numpy()
-    else:
-        return js_dist
+    return nx.to_numpy(js_dist)
     # print("vectorized jsd")
     # X = X/nx.sum(X,axis=1, keepdims=True)
     # Y = Y/nx.sum(Y,axis=1, keepdims=True)
