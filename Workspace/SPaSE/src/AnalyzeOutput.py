@@ -155,12 +155,11 @@ class AnalyzeOutput:
 
         # adata_healthy_right = 'None'
         if self.config['adata_healthy_right_path'] == 'None':
+            adata_healthy_right = sc.read(self.config['adata_healthy_right_path'])
             decompose = True
         else:
+            adata_healthy_right = None
             decompose = False
-            
-        if self.config['adata_healthy_right_path'] != 'None':
-            adata_healthy_right = sc.read(self.config['adata_healthy_right_path'])
 
         right_threshold = self.get_goodness_threshold_from_null_distribution(adata_to_be_synthesized, adata_healthy_right, decompose=decompose)
 
@@ -210,7 +209,7 @@ class AnalyzeOutput:
         # os.makedirs(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/', exist_ok=True)
         # self.adata_left.write(f'{self.results_path}/../local_data/{self.config_file_name}/Processed_adatas/adata_left_processed.h5ad')
 
-    def get_goodness_threshold_from_null_distribution(self, adata, adata_2='None', decompose=True):
+    def get_goodness_threshold_from_null_distribution(self, adata, adata_2=None, decompose=True):
         print("\nSynthesizing the healthy sample\n")
         if decompose:
             adata_0, adata_1 = get_2hop_adatas(adata)
